@@ -23,15 +23,17 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       $(function () {
-        var socket = io('http://localhost:5000/roomTest');
+        var socket = io('http://localhost:5000/hola');
         console.log(socket)
         $('form').submit(function(){
-          socket.emit('chat message', $('#m').val());
-          $('#m').val('');
+          socket.emit('chat_message', {
+            content: $('#m').val(),
+            participant: {nickname: 'other'},
+          });
           return false;
         });
-        socket.on('chat message', function(msg){
-          $('#messages').append($('<li>').text(msg));
+        socket.on('chat_message', function(msg){
+          $('#messages').append($('<li>').text(msg.content));
           window.scrollTo(0, document.body.scrollHeight);
         });
       });

@@ -1,0 +1,19 @@
+@import "styles/globals.scss";
+
+.app {
+  width: 100vw;
+  height: 100vh;
+  background: $dark;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .app-card {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    background: $light;
+    border-radius: 50px;
+    box-shadow: $heavy-shadow;
+  }
+}

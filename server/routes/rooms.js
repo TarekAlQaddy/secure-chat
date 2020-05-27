@@ -27,9 +27,9 @@ router.post('/',async (req, res) => {
       socketIo.activeSockets[req.body.name] = socket;
       socket.on('connection', (s) => {
         console.log('new connection');
-        s.on('chat message', (m) => {
-          console.log('sending chat message', m);
-          socket.emit('chat message', m)
+        s.on('chat_message', (m) => {
+          console.log('sending chat_message', m);
+          socket.emit('chat_message', m)
         })
       });
       return res.status(201).send(room);
@@ -47,7 +47,7 @@ router.get('/:name', async (req, res) => {
   return res.send(room);
 });
 
-router.post('/:name/add-participant', async (req, res) => {
+router.post('/:name/participants', async (req, res) => {
   await check('nickname').isString().notEmpty().run(req);
   await check('publicKey').isString().notEmpty().run(req);
   const result = validationResult(req);
@@ -65,11 +65,12 @@ router.post('/:name/add-participant', async (req, res) => {
       { new: true }
     );
     if (result === null) {
-      return res.status(404).send('Not Found');
+      return res.status(404).send('Room Not Found');
     }
     if (result) {
-      socketIo.activeSockets[req.params.name].emit('participant added', result);
-      return res.send(result);
+      const addedParticipant = result.participants.find(p => p.publicKey === req.body.publicKey);
+      socketIo.activeSockets[req.params.name].emit('add_participant', addedParticipant);
+      return res.status(201).send(result);
     }
   } catch (e) {
     return res.status(400).send('Something went wrong');

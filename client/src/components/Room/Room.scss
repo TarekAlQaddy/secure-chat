@@ -1,0 +1,17 @@
+@import "../../styles/globals";
+
+.room {
+  display: flex;
+  flex-direction: column;
+
+  .chat-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .room-wrapper {
+    padding: $spacing-md;
+  }
+}

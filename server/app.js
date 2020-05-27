@@ -1,14 +1,15 @@
 const express = require('express');
 const http = require('http');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const createError = require('http-errors');
 const logger = require('morgan');
 const bodyParser = require("body-parser");
+require('dotenv').config();
 const socketIo = require('./socket.io');
 
 const indexRouter = require('./routes/index');
 const roomsRouter = require('./routes/rooms');
-
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -16,6 +17,7 @@ const DB_URL = process.env.DB_URL || 'mongodb://localhost:27017/secure-chat';
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
+app.use(cors({ origin: process.env.FRONTEND_BASE }));
 
 app.use('/', indexRouter);
 app.use('/rooms', roomsRouter);

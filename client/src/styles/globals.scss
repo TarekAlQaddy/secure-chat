@@ -1,0 +1,29 @@
+$dark: #313131;
+$light: #efefef;
+$green: #fce27f;
+$grey: #b1b1b1;
+
+$spacing-sm: 5px;
+$spacing-md: 10px;
+$spacing-lg: 15px;
+$spacing-xl: 25px;
+$spacing-xxl: 30px;
+
+$light-shadow: 0 5px 25px rgba(0, 0, 0, 0.03), 0 10px 15px rgba(0, 0, 0, 0.03);
+$heavy-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+
+input {
+  border: none;
+  border-radius: 20px;
+  height: 50px;
+  text-align: center;
+  font-size: 2rem;
+  box-shadow: $light-shadow;
+}
+
+button {
+  border: none;
+  height: 50px;
+  border-radius: 20px;
+  box-shadow: $light-shadow;
+}
